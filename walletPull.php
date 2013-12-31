@@ -32,7 +32,6 @@ while ($row = $stmtPullWithdraw->fetch(PDO::FETCH_ASSOC)) {
 	$stmt = $pdo->prepare('SELECT * FROM evetransactions WHERE processed = "0" AND characterID = :characterID AND transactionType = "37" AND amount =:amount');
 	$stmt->execute(array('characterID' => $row['characterID'], 'amount' => $amount));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
-var_dump($row);
 	if($row){
 		$stmt = $pdo->prepare('UPDATE withdraws SET status="4", refID=:refID WHERE uuid = :uuid');
 		$stmt->execute(array('refID' => $row['refID'], 'uuid' => $uuid));
